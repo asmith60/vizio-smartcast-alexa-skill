@@ -57,6 +57,40 @@ const newSessionHandlers = {
 
       context.emit(":tell", "ok");
     });
+  },
+
+  'ControlMediaPlay': function () {
+    const context = this;
+    request.post(config.apiBaseUrl + '/control/media/play', {
+      'auth': {
+        'bearer': config.apiSecret
+      }
+    }, function(err, res) {
+      if (err || res.statusCode !== 200) {
+        console.log(err);
+        context.emit(":tell", config.errorMessage);
+        return;
+      }
+
+      context.emit(":tell", "ok");
+    });
+  },
+
+  'ControlMediaPause': function () {
+    const context = this;
+    request.post(config.apiBaseUrl + '/control/media/pause', {
+      'auth': {
+        'bearer': config.apiSecret
+      }
+    }, function(err, res) {
+      if (err || res.statusCode !== 200) {
+        console.log(err);
+        context.emit(":tell", config.errorMessage);
+        return;
+      }
+
+      context.emit(":tell", "ok");
+    });
   }
 };
 
