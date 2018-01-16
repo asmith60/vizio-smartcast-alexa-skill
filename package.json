@@ -1,0 +1,24 @@
+{
+  "name": "vizio-smartcast-alexa-skill",
+  "version": "1.0.0",
+  "description": "Alexa skill to control your Vizio Smartcast",
+  "main": "handler.js",
+  "dependencies": {
+    "alexa-sdk": "1.0.25",
+    "request": "2.83.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/asmith60/vizio-smartcast-alexa-skill.git"
+  },
+  "author": "asmith60",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/asmith60/vizio-smartcast-alexa-skill/issues"
+  },
+  "homepage": "https://github.com/asmith60/vizio-smartcast-alexa-skill#readme"
+}
