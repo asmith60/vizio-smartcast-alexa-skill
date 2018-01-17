@@ -33,7 +33,7 @@ const newSessionHandlers = {
       }
     }, function(err, res) {
       if (err || res.statusCode !== 200) {
-        console.log(err);
+        console.log(res.statusCode, err);
         context.emit(":tell", config.errorMessage);
         return;
       }
@@ -50,7 +50,7 @@ const newSessionHandlers = {
       }
     }, function(err, res) {
       if (err || res.statusCode !== 200) {
-        console.log(err);
+        console.log(res.statusCode, err);
         context.emit(":tell", config.errorMessage);
         return;
       }
@@ -67,7 +67,7 @@ const newSessionHandlers = {
       }
     }, function(err, res) {
       if (err || res.statusCode !== 200) {
-        console.log(err);
+        console.log(res.statusCode, err);
         context.emit(":tell", config.errorMessage);
         return;
       }
@@ -84,7 +84,31 @@ const newSessionHandlers = {
       }
     }, function(err, res) {
       if (err || res.statusCode !== 200) {
-        console.log(err);
+        console.log(res.statusCode, err);
+        context.emit(":tell", config.errorMessage);
+        return;
+      }
+
+      context.emit(":tell", "ok");
+    });
+  },
+
+  'InputSet': function () {
+    const context = this;
+    let input;
+    if (context.event.request.hasOwnProperty('intent') && context.event.request.intent.hasOwnProperty('slots') && context.event.request.intent.slots.hasOwnProperty('input') && context.event.request.intent.slots.input.hasOwnProperty('value')) {
+       input = context.event.request.intent.slots.input.value;
+    } else {
+      console.log('Input not present in request');
+      context.emit(":tell", 'Could not determine input');
+    }
+    request.post(config.apiBaseUrl + '/input/set/' + input, {
+      'auth': {
+        'bearer': config.apiSecret
+      }
+    }, function(err, res) {
+      if (err || res.statusCode !== 200) {
+        console.log(res.statusCode, err);
         context.emit(":tell", config.errorMessage);
         return;
       }
